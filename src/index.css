@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;700&family=Protest+Guerrilla&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-height: 100vh;
+  @apply bg-bg-primary font-jost;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+nav a.active,
+.selectWrapper {
+  text-shadow: 0px 0px 8px #800080;
+  box-shadow: 0px 0px 8px rgb(128, 0, 128);
+  color: aqua;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: rgba(2, 201, 201, 0.767);
+}
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background-color: rgb(2, 201, 201);
+}
+
+.productSwiper .swiper-pagination-bullet {
+  background-color: purple;
+}
+
+.productSwiper .swiper-pagination {
+  padding-bottom: 0.5rem;
+}
+
+@layer components {
+  .addButton {
+    @apply rounded-md border border-green-300 px-2 py-1 text-green-200 transition duration-300 hover:border-green-900 hover:bg-green-100 hover:text-green-900;
+  }
+
+  .countInput {
+    @apply inline-block max-w-[60px] rounded-md border border-blue-300 bg-transparent py-1 pl-3 text-blue-100;
+  }
+}
+
+@layer utilities {
+  .absoluteCentered {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+}
