@@ -3,7 +3,11 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Spinner from "./components/Spinner";
 
 const Home = lazy(() => import("./pages/Home"));
+<<<<<<< HEAD
 const Product = lazy(() => import("./pages/Home/components/Product"));
+=======
+const Product = lazy(() => import("./pages/Home/Product"));
+>>>>>>> 794c34467477690080e26420d840f6541d2cbf8c
 const Checkout = lazy(() => import("./pages/Checkout"));
 const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
