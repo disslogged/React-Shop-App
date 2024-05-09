@@ -51,18 +51,6 @@ const checkoutSlice = createSlice({
 
       state.totalPrice -= productToRemove.price; // Adjust totalPrice
     },
-    // removeFromBasket(state, action: PayloadAction<number>) {
-    //   const existItem = state.basket.find((p) => p.id === action.payload);
-    //   if (!existItem) return;
-    //   if (existItem.quantity > 1) {
-    //     existItem.quantity--;
-    //     existItem.subTotal -= existItem.price;
-    //   }
-
-    //   if (existItem.quantity === 1) {
-    //     state.basket = state.basket.filter((p) => p.id !== action.payload);
-    //   }
-    // },
   },
 });
 

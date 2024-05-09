@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Product } from "../../../shared/types";
 import { useCheckoutDispatch } from "../../../store/useCheckoutSlice";
 import { addToBasket } from "../../../store/checkoutSlice";
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent, MouseEvent } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 type ProductProps = {
@@ -32,8 +32,10 @@ const ProductItem = ({ product }: ProductProps) => {
   const quantityRef = useRef<HTMLInputElement>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const dispatch = useCheckoutDispatch();
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     const subTotal = product.price * quantity;
     notification();
     dispatch(addToBasket({ ...product, quantity, subTotal }));
@@ -41,8 +43,15 @@ const ProductItem = ({ product }: ProductProps) => {
     setQuantity(1);
   };
 
+  const handleSelectProduct = () => {
+    navigate(`/products/${product.id}`);
+  };
+
   return (
-    <div className="mb-2 mt-6 grid rounded-md border border-purple-600 px-5 py-7 text-white transition duration-200 hover:shadow-[0_0px_10px_rgba(128,0,242,1)]">
+    <div
+      onClick={handleSelectProduct}
+      className="mb-2 mt-6 grid cursor-pointer rounded-md border border-purple-600 px-5 py-7 text-white transition duration-200 hover:shadow-[0_0px_10px_rgba(128,0,242,1)]"
+    >
       <h2 className="mb-3 overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold text-blue-300">
         {product.title}
       </h2>
@@ -52,23 +61,19 @@ const ProductItem = ({ product }: ProductProps) => {
         <span className="block select-none font-protest text-2xl text-cyan-400">
           {product.price} $
         </span>
-        <div className="flex items-center gap-2">
-          <Link
-            to={String(product.id)}
-            className="inline-block rounded-md border border-y-red-100 px-2 py-1 text-gray-200 transition duration-300 hover:border-violet-400"
-          >
-            View
-          </Link>
+        <div className="z-10 flex items-center gap-2">
           <input
             type="number"
             min={1}
             max={99}
             className="countInput"
             value={quantity}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setQuantity(+e.currentTarget.value)
-            }
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              e.stopPropagation();
+              setQuantity(+e.currentTarget.value);
+            }}
             ref={quantityRef}
+            onClick={(e: MouseEvent) => e.stopPropagation()}
           />
           <button className="addButton" onClick={handleAddToCart}>
             Add To Cart
