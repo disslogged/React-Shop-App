@@ -26,9 +26,9 @@ const Home = () => {
 
   const products = useMemo(() => {
     return data && searchParams.get("category")
-      ? data.filter(
-          (product) => product.category.name === searchParams.get("category"),
-        )
+      ? data.filter((product) => {
+          return product.category.name === searchParams.get("category");
+        })
       : data;
   }, [data, searchParams]);
 
@@ -46,11 +46,7 @@ const Home = () => {
             {isLoading && <Spinner fullScreen={true} />}
 
             {/* success state */}
-            {data && (
-              <ProductList
-                data={products && products.length > 0 ? products : data}
-              />
-            )}
+            {data && <ProductList data={products} />}
 
             {/* error state */}
             {isError && (

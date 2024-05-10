@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
+import { categoriesList } from "../../../utils/constants/data";
 
 const SelectCategory = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -7,8 +8,7 @@ const SelectCategory = () => {
   const handleSelectCategory = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedCategory = e.target.value;
     setSearchParams({ category: selectedCategory });
-
-    if (selectedCategory === "all") {
+    if (selectedCategory === "All") {
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.delete("category");
       setSearchParams(newSearchParams);
@@ -22,15 +22,11 @@ const SelectCategory = () => {
              dark:text-cyan-300 "
         onChange={handleSelectCategory}
       >
-        <option value="all" className="py-4">
-          All
-        </option>
-        <option value="Electronics" className="py-4">
-          Electronics
-        </option>
-        <option value="Clothes" className="py-4">
-          Clothes
-        </option>
+        {categoriesList.map((category) => (
+          <option value={category.name} className="py-4" key={category.id}>
+            {category.name}
+          </option>
+        ))}
       </select>
     </div>
   );
