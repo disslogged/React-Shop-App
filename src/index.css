@@ -50,6 +50,10 @@ nav a.active,
   padding-bottom: 0.5rem;
 }
 
+.lockScroll {
+  overflow: hidden;
+}
+
 @layer components {
   .addButton {
     @apply rounded-md border border-green-300 px-2 py-1 text-green-200 transition duration-300 hover:border-green-900 hover:bg-green-100 hover:text-green-900;
